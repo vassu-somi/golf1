@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [renderBall, setRenderBall] = useState(false);
+  const [position, setPosition] = useState(0);
+  const [ballPosition, setBallPosition] = useState({ left: 0 });
+
+  function updateBall(event){
+    if(event.key==="ArrowRight"){
+        setBallPosition(prevState=>({left:prevState.left+5}))
+    }
+}
+
+//Start Timer ---> clean Timer in cleanup
+// Add Event Listener ----> Remove Event Listener in Cleanup
+
+
+  useEffect(() => {
+    document.addEventListener("keydown",updateBall)
+
+    return () => {
+        document.removeEventListener("keydown",updateBall)
+    }
+  }, []);
+
+  function buttonClickHandler() {
+     setRenderBall(true);
+  }
+
+  function renderBallOrButton() {
+    if (renderBall) {
+      return <div className="ball" style={{position:"absolute",left:ballPosition.left}}></div>;
+    } else {
+      return <button onClick={buttonClickHandler}>Click For One Ball</button>;
+    }
+  }
+
+  return <div className="playground">{renderBallOrButton()}</div>;
 }
 
 export default App;

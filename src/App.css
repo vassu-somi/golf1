@@ -10,7 +10,23 @@
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
-  }
+  }.playground{
+    width:50%;
+    height:50%;
+    margin: auto;
+}
+body html .root {
+    height: 100%;
+}
+.ball{
+    background-color: black;
+    box-shadow: 0 10px 10px -6px;
+    position: relative;
+    right: 0px;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
 }
 
 .App-header {
